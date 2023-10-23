@@ -2,7 +2,9 @@ package com.jens.controller;
 
 import com.jens.common.R;
 import com.jens.domain.Ebook;
+import com.jens.dto.EbookDto;
 import com.jens.service.EbookService;
+import com.jens.vo.EbookVo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +19,8 @@ public class EbookController {
     private EbookService ebookService;
 
     @GetMapping("/list")
-    public R<List<Ebook>> list(){
-        List<Ebook> list = ebookService.list();
+    public R list(EbookDto ebookDto){
+        List<EbookVo> list = ebookService.list(ebookDto);
         return R.success(list);
     }
 }

@@ -1,1 +1,1 @@
-GET http://localhost/ebook/list
+GET http://localhost/ebook/list?name=入门

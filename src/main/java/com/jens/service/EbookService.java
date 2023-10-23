@@ -2,6 +2,10 @@ package com.jens.service;
 
 import com.jens.domain.Ebook;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jens.dto.EbookDto;
+import com.jens.vo.EbookVo;
+
+import java.util.List;
 
 /**
 * @author 23144
@@ -9,5 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-10-23 21:26:59
 */
 public interface EbookService extends IService<Ebook> {
-
+    public List<EbookVo> list(EbookDto ebookDto);
 }
