@@ -19,10 +19,23 @@ public class R<T> {
     private T data;
 
     protected R(){}
+    protected R(Long code,String message){
+        this.code = code;
+        this.message = message;
+    }
     protected R(Long code,String message,T data){
         this.data = data;
         this.code = code;
         this.message = message;
+    }
+
+    /**
+     * 返回成功
+     * @return
+     * @param <T>
+     */
+    public static <T> R<T> success(){
+        return new R<>(ResultCode.SUCCESS.getCode(),ResultCode.SUCCESS.getMsg());
     }
 
     /**

@@ -1,1 +1,8 @@
-GET http://localhost/ebook/list
+### 查询电子书信息
+GET http://localhost/ebook/list?page=2&size=2&name=Spring
+Accept: application/json
+
+
+### 修改电子书信息
+POST http://localhost:80/ebook/edit
+Content-Type: application/json

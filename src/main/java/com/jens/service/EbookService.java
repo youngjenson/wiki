@@ -3,10 +3,9 @@ package com.jens.service;
 import com.jens.common.PageResp;
 import com.jens.domain.Ebook;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.jens.dto.EbookDto;
+import com.jens.dto.EbookEditDto;
+import com.jens.dto.EbookQueryDto;
 import com.jens.vo.EbookVo;
-
-import java.util.List;
 
 /**
 * @author 23144
@@ -14,5 +13,7 @@ import java.util.List;
 * @createDate 2023-10-23 21:26:59
 */
 public interface EbookService extends IService<Ebook> {
-    PageResp<EbookVo> list(EbookDto ebookDto);
+    PageResp<EbookVo> list(EbookQueryDto ebookQueryDto);
+
+    boolean editById(EbookEditDto ebookEditDto);
 }
