@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
 public class EbookEditDto {
 
@@ -21,6 +23,7 @@ public class EbookEditDto {
     /**
      * 名称
      */
+    @NotBlank(message = "[名称]不能为空")
     private String name;
 
     /**

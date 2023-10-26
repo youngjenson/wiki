@@ -9,6 +9,7 @@ import com.jens.vo.EbookVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/ebook")
@@ -17,14 +18,20 @@ public class EbookController {
     private EbookService ebookService;
 
     @GetMapping("/list")
-    public R list(EbookQueryDto ebookQueryDto) {
+    public R list(@Valid EbookQueryDto ebookQueryDto) {
         PageResp<EbookVo> list = ebookService.list(ebookQueryDto);
         return R.success(list);
     }
 
     @PostMapping("/edit")
-    public R editById(@RequestBody EbookEditDto ebookEditDto) {
+    public R editById(@Valid @RequestBody EbookEditDto ebookEditDto) {
         boolean b = ebookService.edit(ebookEditDto);
+        return b ? R.success() : R.failed();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public R deleteById(@PathVariable Long id) {
+        boolean b = ebookService.deleteById(id);
         return b ? R.success() : R.failed();
     }
 }

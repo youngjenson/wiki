@@ -1,6 +1,5 @@
 ### 查询电子书信息
-GET http://localhost/ebook/list?page=2&size=2&name=Spring
-Accept: application/json
+GET http://localhost/ebook/list
 
 
 ### 修改电子书信息

@@ -16,4 +16,6 @@ public interface EbookService extends IService<Ebook> {
     PageResp<EbookVo> list(EbookQueryDto ebookQueryDto);
 
     boolean edit(EbookEditDto ebookEditDto);
+
+    boolean deleteById(Long id);
 }

@@ -55,13 +55,19 @@ public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook>
     @Override
     public boolean edit(EbookEditDto ebookEditDto) {
         Ebook ebook = CopyUtil.copy(ebookEditDto, Ebook.class);
-        if(ObjectUtils.isEmpty(ebook.getId())){
+        if (ObjectUtils.isEmpty(ebook.getId())) {
             long id = snowflakeUtil.nextId();
             ebook.setId(id);
             int insert = ebookMapper.insert(ebook);
             return insert > 0;
         }
         int i = ebookMapper.updateById(ebook);
+        return i > 0;
+    }
+
+    @Override
+    public boolean deleteById(Long id) {
+        int i = ebookMapper.deleteById(id);
         return i > 0;
     }
 }
