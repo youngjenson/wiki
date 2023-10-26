@@ -10,7 +10,9 @@ import com.jens.dto.EbookQueryDto;
 import com.jens.mapper.EbookMapper;
 import com.jens.service.EbookService;
 import com.jens.utils.CopyUtil;
+import com.jens.utils.SnowflakeUtil;
 import com.jens.vo.EbookVo;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,9 @@ public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook>
 
     @Resource
     EbookMapper ebookMapper;
+
+    @Resource
+    SnowflakeUtil snowflakeUtil;
 
 
     @Override
@@ -48,8 +53,14 @@ public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook>
     }
 
     @Override
-    public boolean editById(EbookEditDto ebookEditDto) {
+    public boolean edit(EbookEditDto ebookEditDto) {
         Ebook ebook = CopyUtil.copy(ebookEditDto, Ebook.class);
+        if(ObjectUtils.isEmpty(ebook.getId())){
+            long id = snowflakeUtil.nextId();
+            ebook.setId(id);
+            int insert = ebookMapper.insert(ebook);
+            return insert > 0;
+        }
         int i = ebookMapper.updateById(ebook);
         return i > 0;
     }

@@ -1,5 +1,6 @@
 package com.jens.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jens.common.PageParams;
 import lombok.Getter;
 
@@ -8,6 +9,7 @@ public class EbookQueryDto extends PageParams {
     /**
      * id
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long id;
 
     /**

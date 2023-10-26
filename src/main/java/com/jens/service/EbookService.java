@@ -15,5 +15,5 @@ import com.jens.vo.EbookVo;
 public interface EbookService extends IService<Ebook> {
     PageResp<EbookVo> list(EbookQueryDto ebookQueryDto);
 
-    boolean editById(EbookEditDto ebookEditDto);
+    boolean edit(EbookEditDto ebookEditDto);
 }

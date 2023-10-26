@@ -24,7 +24,7 @@ public class EbookController {
 
     @PostMapping("/edit")
     public R editById(@RequestBody EbookEditDto ebookEditDto) {
-        boolean b = ebookService.editById(ebookEditDto);
+        boolean b = ebookService.edit(ebookEditDto);
         return b ? R.success() : R.failed();
     }
 }
