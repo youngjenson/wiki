@@ -43,7 +43,6 @@ public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook>
         Page<Ebook> pageInfo = new Page<>(ebookQueryDto.page, ebookQueryDto.size);
         Page<Ebook> ebookPage = ebookMapper.selectPage(pageInfo, queryWrapper);
         List<Ebook> ebooks = ebookPage.getRecords();
-        System.out.println(ebooks);
         long total = ebookPage.getTotal();
         PageResp<EbookVo> pageResp = new PageResp<>();
         List<EbookVo> ebookVos = CopyUtil.copyList(ebooks, EbookVo.class);
