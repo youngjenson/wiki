@@ -1,5 +1,6 @@
 package com.jens.service;
 
+import com.jens.common.PageResp;
 import com.jens.domain.Ebook;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jens.dto.EbookDto;
@@ -13,5 +14,5 @@ import java.util.List;
 * @createDate 2023-10-23 21:26:59
 */
 public interface EbookService extends IService<Ebook> {
-    public List<EbookVo> list(EbookDto ebookDto);
+    PageResp<EbookVo> list(EbookDto ebookDto);
 }

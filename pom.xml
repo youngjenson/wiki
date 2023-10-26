@@ -60,6 +60,7 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.83</version>
         </dependency>
+
     </dependencies>
 
     <build>
