@@ -1,5 +1,6 @@
 package com.jens.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jens.domain.Category;
 import lombok.Data;
 
@@ -11,11 +12,13 @@ public class CategoryVo {
     /**
      * id
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long id;
 
     /**
      * 父id
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long parent;
 
     /**
