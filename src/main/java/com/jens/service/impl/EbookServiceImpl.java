@@ -39,6 +39,7 @@ public class EbookServiceImpl extends ServiceImpl<EbookMapper, Ebook>
     public PageResp<EbookVo> list(EbookQueryDto ebookQueryDto) {
 
         LambdaQueryWrapper<Ebook> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(ObjectUtils.isNotEmpty(ebookQueryDto.getCategory2Id()),Ebook::getCategory2Id,ebookQueryDto.getCategory2Id());
         queryWrapper.like(StringUtils.isNotEmpty(ebookQueryDto.getName()), Ebook::getName, ebookQueryDto.getName());
         Page<Ebook> pageInfo = new Page<>(ebookQueryDto.page, ebookQueryDto.size);
         Page<Ebook> ebookPage = ebookMapper.selectPage(pageInfo, queryWrapper);
