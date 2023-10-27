@@ -1,16 +1,14 @@
 package com.jens.controller;
 
-import com.jens.common.PageResp;
 import com.jens.common.R;
 import com.jens.dto.CategoryEditDto;
-import com.jens.dto.CategoryQueryDto;
-import com.jens.dto.categoryEditDto;
 import com.jens.service.CategoryService;
 import com.jens.vo.CategoryVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/category")
@@ -19,8 +17,8 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/list")
-    public R list(@Valid CategoryQueryDto categoryQueryDto) {
-        PageResp<CategoryVo> list = categoryService.list(categoryQueryDto);
+    public R list() {
+        List<CategoryVo> list = categoryService.findCategoryTree();
         return R.success(list);
     }
 

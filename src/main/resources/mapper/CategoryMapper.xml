@@ -5,14 +5,42 @@
 <mapper namespace="com.jens.mapper.CategoryMapper">
 
     <resultMap id="BaseResultMap" type="com.jens.domain.Category">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="parent" column="parent" jdbcType="BIGINT"/>
-            <result property="name" column="name" jdbcType="VARCHAR"/>
-            <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="parent" column="parent" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,parent,name,
+        id
+        ,parent,name,
         sort
     </sql>
+    <resultMap id="treeNodeResultMap" type="com.jens.vo.CategoryVo">
+        <id column="one_id" property="id"/>
+        <result column="one_name" property="name"/>
+        <result column="one_parent" property="parent"/>
+        <result column="one_sort" property="sort"/>
+        <collection property="children" ofType="com.jens.vo.CategoryVo">
+            <id column="two_id" property="id"/>
+            <result column="two_name" property="name"/>
+            <result column="two_parent" property="parent"/>
+            <result column="two_sort" property="sort"/>
+        </collection>
+    </resultMap>
+    <select id="selectTreeNodes" resultMap="treeNodeResultMap">
+        select one.id     one_id,
+               one.parent one_parent,
+               one.name   one_name,
+               one.sort   one_sort,
+               two.id     two_id,
+               two.name   two_name,
+               two.parent two_parent,
+               two.sort   two_sort
+        from category one
+                 left join category two
+                           on two.parent = one.id
+        where one.parent = 0
+        order by one.sort, two.sort
+    </select>
 </mapper>

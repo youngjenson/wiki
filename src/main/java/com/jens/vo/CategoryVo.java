@@ -1,6 +1,9 @@
 package com.jens.vo;
 
+import com.jens.domain.Category;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class CategoryVo {
@@ -24,4 +27,9 @@ public class CategoryVo {
      * 顺序
      */
     private Integer sort;
+
+    /**
+     * 子标签
+     */
+    private List<CategoryVo> children;
 }

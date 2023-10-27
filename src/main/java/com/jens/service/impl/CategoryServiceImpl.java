@@ -5,16 +5,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jens.common.PageResp;
 import com.jens.domain.Category;
-import com.jens.domain.category;
 import com.jens.dto.CategoryEditDto;
 import com.jens.dto.CategoryQueryDto;
-import com.jens.dto.categoryEditDto;
-import com.jens.service.CategoryService;
 import com.jens.mapper.CategoryMapper;
+import com.jens.service.CategoryService;
 import com.jens.utils.CopyUtil;
 import com.jens.utils.SnowflakeUtil;
 import com.jens.vo.CategoryVo;
-import com.jens.vo.categoryVo;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 
@@ -36,19 +33,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
     @Resource
     SnowflakeUtil snowflakeUtil;
 
-    @Override
-    public PageResp<CategoryVo> list(CategoryQueryDto categoryQueryDto) {
-        LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
-        Page<Category> categoryPage = new Page<>(categoryQueryDto.page, categoryQueryDto.size);
-        Page<Category> page = categoryMapper.selectPage(categoryPage, queryWrapper);
-        List<Category> categories = page.getRecords();
-        long total = page.getTotal();
-        PageResp<CategoryVo> pageResp = new PageResp<>();
-        List<CategoryVo> categoryVos = CopyUtil.copyList(categories, CategoryVo.class);
-        pageResp.setTotal(total);
-        pageResp.setList(categoryVos);
-        return pageResp;
-    }
 
     @Override
     public boolean edit(CategoryEditDto categoryEditDto) {
@@ -67,6 +51,11 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
     public boolean deleteById(Long id) {
         int i = categoryMapper.deleteById(id);
         return i > 0;
+    }
+
+    @Override
+    public List<CategoryVo> findCategoryTree() {
+        return categoryMapper.selectTreeNodes();
     }
 }
 
