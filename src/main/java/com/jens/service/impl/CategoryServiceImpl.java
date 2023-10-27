@@ -1,12 +1,8 @@
 package com.jens.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.jens.common.PageResp;
 import com.jens.domain.Category;
 import com.jens.dto.CategoryEditDto;
-import com.jens.dto.CategoryQueryDto;
 import com.jens.mapper.CategoryMapper;
 import com.jens.service.CategoryService;
 import com.jens.utils.CopyUtil;

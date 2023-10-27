@@ -1,7 +1,6 @@
 package com.jens.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.jens.domain.Category;
 import lombok.Data;
 
 import java.util.List;

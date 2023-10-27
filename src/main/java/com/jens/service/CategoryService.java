@@ -1,13 +1,9 @@
 package com.jens.service;
 
-import com.jens.common.PageResp;
-import com.jens.domain.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jens.domain.Category;
 import com.jens.dto.CategoryEditDto;
-import com.jens.dto.CategoryQueryDto;
-import com.jens.dto.EbookQueryDto;
 import com.jens.vo.CategoryVo;
-import com.jens.vo.EbookVo;
 
 import java.util.List;
 

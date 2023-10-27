@@ -2,7 +2,6 @@ package com.jens.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jens.common.PageParams;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

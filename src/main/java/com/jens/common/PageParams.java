@@ -3,7 +3,6 @@ package com.jens.common;
 import lombok.Getter;
 
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Null;
 
 @Getter
 public class PageParams {
