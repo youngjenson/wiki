@@ -3,6 +3,7 @@ package com.jens.controller;
 import cn.hutool.core.lang.tree.Tree;
 import com.jens.common.R;
 import com.jens.dto.DocEditDto;
+import com.jens.dto.DocQueryDto;
 import com.jens.service.DocService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +19,8 @@ public class DocController {
     DocService docService;
 
     @GetMapping("/list")
-    public R list(){
-        List<Tree<String>> docTree = docService.findDocTree();
+    public R list(Long ebookId){
+        List<Tree<String>> docTree = docService.findDocTree(ebookId);
         return R.success(docTree);
     }
 
@@ -29,9 +30,9 @@ public class DocController {
         return b ? R.success() : R.failed();
     }
 
-    @DeleteMapping("/delete/{id}")
-    public R deleteById(@PathVariable Long id) {
-        boolean b = docService.deleteById(id);
+    @DeleteMapping("/delete")
+    public R deleteByIds(@RequestBody List<Long> ids) {
+        boolean b = docService.deleteByIds(ids);
         return b ? R.success() : R.failed();
     }
 }

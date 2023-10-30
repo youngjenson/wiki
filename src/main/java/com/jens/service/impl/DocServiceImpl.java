@@ -4,15 +4,18 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNodeConfig;
 import cn.hutool.core.lang.tree.TreeUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jens.domain.Doc;
 import com.jens.dto.DocEditDto;
+import com.jens.dto.DocQueryDto;
 import com.jens.mapper.DocMapper;
 import com.jens.service.DocService;
 import com.jens.utils.CopyUtil;
 import com.jens.utils.SnowflakeUtil;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -33,9 +36,11 @@ public class DocServiceImpl extends ServiceImpl<DocMapper, Doc>
     SnowflakeUtil snowflakeUtil;
 
     @Override
-    public List<Tree<String>> findDocTree() {
+    public List<Tree<String>> findDocTree(Long ebookId) {
 
-        List<Doc> docs = docMapper.selectList(null);
+        LambdaQueryWrapper<Doc> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(ObjectUtils.isNotEmpty(ebookId), Doc::getEbookId, ebookId);
+        List<Doc> docs = docMapper.selectList(queryWrapper);
         List<Doc> copyDocs = CollUtil.newArrayList();
         copyDocs.addAll(docs);
         String parent = "0";
@@ -47,8 +52,9 @@ public class DocServiceImpl extends ServiceImpl<DocMapper, Doc>
                     tree.setId(node.getId().toString());
                     tree.setName(node.getName());
                     tree.setParentId(node.getParent().toString());
-                    tree.putExtra("parent",node.getParent().toString());
-                    tree.putExtra("sort",node.getSort());
+                    tree.putExtra("parent", node.getParent().toString());
+                    tree.putExtra("sort", node.getSort());
+                    tree.putExtra("ebookId", node.getEbookId());
                 });
     }
 
@@ -66,8 +72,9 @@ public class DocServiceImpl extends ServiceImpl<DocMapper, Doc>
     }
 
     @Override
-    public boolean deleteById(Long id) {
-        return false;
+    public boolean deleteByIds(List<Long> ids) {
+        int i = docMapper.deleteBatchIds(ids);
+        return i > 0;
     }
 }
 

@@ -4,6 +4,7 @@ import cn.hutool.core.lang.tree.Tree;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jens.domain.Doc;
 import com.jens.dto.DocEditDto;
+import com.jens.dto.DocQueryDto;
 
 import java.util.List;
 
@@ -13,9 +14,9 @@ import java.util.List;
 * @createDate 2023-10-27 22:06:19
 */
 public interface DocService extends IService<Doc> {
-    List<Tree<String>> findDocTree();
+    List<Tree<String>> findDocTree(Long ebookId);
 
     boolean edit(DocEditDto docEditDto);
 
-    boolean deleteById(Long id);
+    boolean deleteByIds(List<Long> ids);
 }
