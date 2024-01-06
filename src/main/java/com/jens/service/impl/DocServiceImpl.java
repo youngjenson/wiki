@@ -47,6 +47,7 @@ public class DocServiceImpl extends ServiceImpl<DocMapper, Doc>
         TreeNodeConfig nodeConfig = new TreeNodeConfig();
         nodeConfig.setIdKey("id");
         nodeConfig.setDeep(10);
+        //构造树形结构
         return TreeUtil.build(copyDocs, parent, nodeConfig,
                 (node, tree) -> {
                     tree.setId(node.getId().toString());

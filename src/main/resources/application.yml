@@ -3,9 +3,9 @@ server:
 #配置mysql数据源
 spring:
   datasource:
-    url: jdbc:mysql://110.42.99.174:3306/wiki?characterEncoding=UTF8&autoReconnect=true&serverTimeZone=Asia/Shanghai
-    username: wiki
-    password: wiki
+    url: jdbc:mysql://127.0.0.1:3306/wiki?characterEncoding=UTF8&autoReconnect=true&serverTimeZone=Asia/Shanghai
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 #配置mybatis加载mapper.xml
