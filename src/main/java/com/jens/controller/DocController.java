@@ -4,7 +4,9 @@ import cn.hutool.core.lang.tree.Tree;
 import com.jens.common.R;
 import com.jens.dto.DocEditDto;
 import com.jens.dto.DocQueryDto;
+import com.jens.service.ContentService;
 import com.jens.service.DocService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -16,7 +18,10 @@ import java.util.List;
 public class DocController {
 
     @Resource
-    DocService docService;
+    private DocService docService;
+
+    @Autowired
+    private ContentService contentService;
 
     @GetMapping("/list")
     public R list(Long ebookId){
@@ -34,5 +39,10 @@ public class DocController {
     public R deleteByIds(@RequestBody List<Long> ids) {
         boolean b = docService.deleteByIds(ids);
         return b ? R.success() : R.failed();
+    }
+
+    @GetMapping("/find-content/{id}")
+    public R findContent(@PathVariable Long id){
+        return contentService.findContentById(id);
     }
 }

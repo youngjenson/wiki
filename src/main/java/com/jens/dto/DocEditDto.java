@@ -42,7 +42,7 @@ public class DocEditDto {
     /**
      * 顺序
      */
-    @NotNull(message = "[排序]不能为空]")
+    @NotNull(message = "[排序]不能为空")
     private Integer sort;
 
     /**
@@ -54,4 +54,7 @@ public class DocEditDto {
      * 点赞数
      */
     private Integer voteCount;
+
+    @NotBlank(message = "[内容]不能为空")
+    private String content;
 }
