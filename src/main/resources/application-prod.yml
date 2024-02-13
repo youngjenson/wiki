@@ -7,6 +7,10 @@ spring:
     username: root
     password: ~!@root
     driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 149.88.76.73
+    port: 6379
+    timeout: 3000 #连接超时时间
 
 #配置mybatis加载mapper.xml
 mybatis-plus:
