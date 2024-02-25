@@ -6,6 +6,7 @@ import com.jens.dto.EbookEditDto;
 import com.jens.dto.EbookQueryDto;
 import com.jens.service.EbookService;
 import com.jens.vo.EbookVo;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -24,12 +25,14 @@ public class EbookController {
     }
 
     @PostMapping("/edit")
+    @PreAuthorize("hasAuthority('sys:all:admin')")
     public R editById(@Valid @RequestBody EbookEditDto ebookEditDto) {
         boolean b = ebookService.edit(ebookEditDto);
         return b ? R.success() : R.failed();
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('sys:all:admin')")
     public R deleteById(@PathVariable Long id) {
         boolean b = ebookService.deleteById(id);
         return b ? R.success() : R.failed();

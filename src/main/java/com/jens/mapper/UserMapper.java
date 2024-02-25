@@ -3,6 +3,7 @@ package com.jens.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jens.domain.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @Author:Jens
@@ -11,5 +12,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
-    
+
+    int updateByIdSelective(@Param("user") User user);
 }
