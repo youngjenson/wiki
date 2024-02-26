@@ -25,11 +25,11 @@ public class JwtUtil {
 
     /**
      * 创建token
+     *
      * @param id
-     * @param name
      * @return
      */
-    public static String createToken(Long id, String name) {
+    public static String createToken(Long id) {
         DateTime now = DateTime.now();
         DateTime expTime = now.offsetNew(DateField.HOUR, 24);
         Map<String, Object> payload = new HashMap<>();
@@ -41,7 +41,6 @@ public class JwtUtil {
         payload.put(JWTPayload.NOT_BEFORE, now);
         // 内容
         payload.put("id", id);
-        payload.put("name", name);
         String token = JWTUtil.createToken(payload, KEY.getBytes());
         return token;
     }

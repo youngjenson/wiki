@@ -3,10 +3,10 @@ package com.jens.controller;
 import cn.hutool.core.lang.tree.Tree;
 import com.jens.common.R;
 import com.jens.dto.DocEditDto;
-import com.jens.dto.DocQueryDto;
 import com.jens.service.ContentService;
 import com.jens.service.DocService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -30,12 +30,14 @@ public class DocController {
     }
 
     @PostMapping("/edit")
+    @PreAuthorize("hasAuthority('sys:all:admin')")
     public R editById(@Valid @RequestBody DocEditDto docEditDto) {
         boolean b = docService.edit(docEditDto);
         return b ? R.success() : R.failed();
     }
 
     @DeleteMapping("/delete")
+    @PreAuthorize("hasAuthority('sys:all:admin')")
     public R deleteByIds(@RequestBody List<Long> ids) {
         boolean b = docService.deleteByIds(ids);
         return b ? R.success() : R.failed();

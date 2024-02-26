@@ -4,12 +4,17 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.jens.domain.User;
 import com.jens.dto.LoginUser;
+import com.jens.exception.BusinessException;
+import com.jens.exception.BusinessExceptionCode;
+import com.jens.mapper.MenuMapper;
 import com.jens.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author:Jens
@@ -22,6 +27,9 @@ public class LoginServiceImpl implements UserDetailsService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private MenuMapper menuMapper;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -30,11 +38,11 @@ public class LoginServiceImpl implements UserDetailsService {
         User user = userMapper.selectOne(queryWrapper);
 
         if(ObjectUtil.isNull(user)){
-            throw new RuntimeException("用户或者密码错误");
+            throw new BusinessException(BusinessExceptionCode.USER_LOGIN_FAILURE);
         }
-        //todo 获取权限
-
+        // 获取权限
+        List<String> permissionKeyList = menuMapper.selectPermsByUserId(user.getId());
         //把数据封装成UserDetails返回
-        return new LoginUser(user);
+        return new LoginUser(user,permissionKeyList);
     }
 }

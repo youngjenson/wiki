@@ -4,4 +4,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jens.mapper.UserMapper">
 
+    <update id="updateByIdSelective" >
+        update user
+        <set>
+            <if test="user.loginName != null and user.loginName != ''">
+                login_name = #{user.loginName},
+            </if>
+            <if test="user.name != null and user.name != ''">
+                `name` = #{user.name},
+            </if>
+            <if test="user.password != null and user.password != ''">
+                password = #{user.password},
+            </if>
+        </set>
+        where id = #{user.id}
+    </update>
 </mapper>
